@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="global.dclass.team5.DAO.MemberMapper">
+	<insert id="insertMember" parameterType="Member">
+		INSERT INTO MEMBER(ID, PW, NAME, DEPARTMENT, DIVISION, INDATE) 
+		VALUES (#{id}, #{pw}, #{name}, #{department}, '学生', SYSDATE)
+	</insert>
+	
+	<select id="selectMember" parameterType="String" resultType="Member">
+		SELECT ID, PW, NAME, DEPARTMENT, DIVISION, INDATE
+		FROM MEMBER
+		WHERE ID = #{id}
+	</select>
+	
+	<update id="updateMember" parameterType="Member">
+		UPDATE MEMBER
+		SET 
+			PW =#{pw},
+			DEPARTMENT=#{department}
+		WHERE ID=#{id}
+	</update>
+	
+	<insert id="insertApplication" parameterType="Application">
+		INSERT INTO APPLICATION(APPLICATIONSEQ, ID, MEMBER1, MEMBER2, MEMBER3, MEMBER4, MEMBERNUM)
+		VALUES (APPLICATIONSEQ.NEXTVAL, #{id}, #{member1}, #{member2}, #{member3}, #{member4}, #{memberNum})
+	</insert>
+	
+	<select id="selectApplication" parameterType="String" resultType="Application">
+		SELECT APPLICATIONSEQ, ID, MEMBER1, MEMBER2, MEMBER3, MEMBER4, MEMBERNUM,  MEMBERCHECK, ADMINCHECK, APPLICATIONDATE
+		FROM APPLICATION
+		WHERE ID = #{id}
+	</select>
+	
+	<insert id="sendConfirmMessage" parameterType="Message">
+		INSERT INTO MESEAGE(TOID, FROMID, MESSAGECONTENT, APPLICATIONSEQ, MSG_SEQ) 
+		VALUES (#{toId}, '管理者', #{messageContent}, #{applicationSeq}, MSG_SEQ.NEXTVAL)
+	</insert>
+</mapper>

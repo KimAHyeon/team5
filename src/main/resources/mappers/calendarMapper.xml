@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="global.dclass.team5.DAO.CalendarMapper">
+
+<select id="selectCalendar" resultType="Calendar" parameterType="string">
+
+	SELECT m.DEPARTMENT,
+		   c.schdule_title,
+		   TO_CHAR(TRUNC(c.start_day),'YYYY-MM-DD') start_day,
+		   TO_CHAR(TRUNC(c.LAST_DAY),'YYYY-MM-DD') last_day,
+		   c.PLACE,
+		   c.DISCRIPTION
+	FROM 
+		CALENDAR c, MEMBER m
+	WHERE 
+		m.ID=c.ID
+	AND 
+        m.ID= #{id}
+    AND
+        m.DEPARTMENT= #{department}
+       	 
+  	ORDER BY TO_CHAR(c.start_day,'YYYY-MM')
+</select>
+
+
+<select id="date_Calendar" resultType="Calendar" parameterType="Member">
+
+	SELECT m.DEPARTMENT,
+		   c.schdule_title,
+		   TO_CHAR(c.start_day,'YYYY-MM-DD') as start_day,
+		   c.PLACE,
+		   c.DISCRIPTION
+	FROM 
+		CALENDAR c, MEMBER m
+	WHERE 
+		m.ID = c.ID
+	AND 
+        m.ID= #{id}
+    AND
+        m.DEPARTMENT=#{department}
+    AND
+        TO_CHAR(c.start_day,'YYYY-MM ') like '%' || #{start_day} || '%'
+ 
+    ORDER BY TO_CHAR(c.start_day,'YYYY-MM') 
+  
+</select>
+
+
+</mapper>

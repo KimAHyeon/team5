@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="global.dclass.team5.DAO.AdminMapper">
+	<select id="searchApplication" resultType="Application">
+		SELECT APPLICATIONSEQ, ID, MEMBER1, MEMBER2, MEMBER3, MEMBER4, MEMBERCHECK, ADMINCHECK
+		FROM APPLICATION
+		WHERE ADMINCHECK != 1
+		ORDER BY APPLICATIONDATE
+	</select>
+	
+	
+</mapper>

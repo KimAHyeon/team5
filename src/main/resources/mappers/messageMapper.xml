@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="global.dclass.team5.DAO.MessageMapper">
+<!-- 날짜순 메세지 셀렉트 -->
+<select id="select_all_messages" resultType = "Message">
+SELECT
+	toId
+	,fromId
+	,messageContent
+	,messageIndate
+	,messageCheck
+	,applicationSeq
+	,confirm
+	,msg_seq
+FROM 
+	meseage 
+order by 
+	messageIndate desc
+</select>
+<!-- 메세지 삭제 -->
+<delete id = "delete_messages" parameterType = "int">
+delete
+	meseage
+where
+	msg_seq = #{msg_seq}
+
+</delete>
+<!-- 메세지 1개  출력  -->
+
+</mapper>
